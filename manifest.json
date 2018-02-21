@@ -1,0 +1,19 @@
+{
+    "manifest_version": 2,
+    "name": "jinteki.net stats autotracker",
+    "description": "Automatically loads jinteki.net stats after a game to a copy of the stats spreadsheet",
+    "version": "1.0",
+    "options_page": "options.html",
+    "browser_action": {
+        "default_icon": "img.png"
+    },
+    "permissions": [
+        "storage"
+    ],
+    "content_scripts": [
+        {
+            "matches": ["https://www.jinteki.net/*"],
+            "js": ["jquery.js", "main.js"]
+        }
+    ]
+}
