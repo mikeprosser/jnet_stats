@@ -50,7 +50,6 @@ function askNotes(callback) {
 function sendData() {
     var data = getData();
     var params = $.map(data, getObj).join('&');
-    console.debug(data);
     request = $.ajax({
         url: window.statsAppUrl,
         type: "post",
@@ -82,8 +81,8 @@ function getData() {
     var data = {
         side: playerBottom,
         hero: me,
-        deck: deckName,
-        notes: notes,
+        deck: "",
+        notes: "",
         date: new Date().toJSON().slice(0, 10).split("-").reverse().join("-"),
         location: 'jinteki',
         opponent: opponent,
@@ -148,5 +147,5 @@ setInterval(function() {
 }, 2000);
 
 function logGame() {
-    askName(askNotes, sendData);
+    sendData();
 }
