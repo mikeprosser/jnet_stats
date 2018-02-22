@@ -103,13 +103,15 @@ function getData() {
 
 var loggedGame = false;
 
-chrome.storage.sync.get({
-    appUrl: '',
-    usernames: ''
-}, function(items) {
-    window.statsAppUrl = items.appUrl;
-    window.usernames = items.usernames.split(",");
-});
+function updateInfo() {
+    chrome.storage.sync.get({
+        appUrl: '',
+        usernames: ''
+    }, function(items) {
+        window.statsAppUrl = items.appUrl;
+        window.usernames = items.usernames.split(",");
+    });
+}
 
 setInterval(function() {
     log = $('.messages');
@@ -121,6 +123,9 @@ setInterval(function() {
             if (!loggedGame) {
                 var winLog = getLogRecord(WIN_RE, log);
                 if (winLog.length) {
+
+                    updateInfo();
+
                     var me = $($('.gameboard h4').get(1)).text();
                     var isMe = false;
 
@@ -149,3 +154,5 @@ setInterval(function() {
 function logGame() {
     sendData();
 }
+
+updateInfo();
